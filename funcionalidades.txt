@@ -1,0 +1,15 @@
+FUNCIONALIDADES PRINCIPAIS
+1) Registro de Conta;
+2) Criação de Projetos;
+3) Navegação e Descoberta;
+4) Campanhas de Crowdfunding:
+   4.1) Lançamento;
+   4.2) Gerenciamento;
+5) Contribuição Financeira:
+   5.1) Doação
+   5.2) Recompensa
+   5.3) Empréstimo
+   5.4) Investimento
+6) Comunicação e Transparência;
+7) Avaliação e Classificação de Usuários;
+8) Conclusão do Projeto.

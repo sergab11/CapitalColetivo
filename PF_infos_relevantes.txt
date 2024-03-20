@@ -1,0 +1,10 @@
+DATAS
+- Entrega da Proposta: até 29/05
+- Entrega do Relatório Final: até 19/06 (data final: até 19/07)
+- Bancas de PFII: 24/06 a 28/06 (data final: 25/07 a 31/07)
+
+> Editor de PDF
+	https://www.sejda.com/pt/pdf-editor
+
+> Assinatura Eletrônica Gov
+	https://www.gov.br/governodigital/pt-br/identidade/assinatura-eletronica
