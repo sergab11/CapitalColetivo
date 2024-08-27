@@ -1,0 +1,63 @@
+{% extends 'usuarios/base.html' %}
+
+{% block titulo %}Adicionar Membro a {{ projeto.titulo }}{% endblock %}
+
+{% block conteudo %}
+<h1 class="mb-12 text-2xl text-center text-purple-900 font-bold">{{titulo}} "{{projeto.titulo}}"</h2>
+
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <!-- Mensagens de Erro e Sucesso -->
+    {% if messages %}
+        <div class="mb-4">
+            {% for message in messages %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+<!-- Formulário para Adicionar Membro -->
+    <form method="post" enctype="multipart/form-data" class="mb-6">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="id_email" class="block text-sm font-medium text-gray-700">Email do Membro</label>
+            <input type="email" id="id_email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        </div>
+        <div class="mb-4">
+            <label for="id_funcao" class="block text-sm font-medium text-gray-700">Função</label>
+            <select id="id_funcao" name="funcao" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <option value="MEMBRO">Membro</option>
+                <option value="ADMINISTRADOR">Administrador</option>
+            </select>
+        </div>
+        <button type="submit" class="bg-purple-700 text-white px-4 py-2 rounded">Adicionar Membro</button>
+    </form>
+
+<!-- Listagem de Membros Atuais -->
+<h2 class="text-purple-800 text-2xl font-bold mb-4">Membros Atuais</h2>
+<table class="table-auto w-full text-left mb-4">
+    <thead class="text-purple-700">
+        <tr>
+            <th class="px-4 py-2">Membro</th>
+            <th class="px-4 py-2">Função</th>
+            <th class="px-4 py-2">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for membro in membros_projeto %}
+            <tr>
+                <td class="border px-4 py-2">{{ membro.usuario.nome }}</td>
+                <td class="border px-4 py-2">{{ membro.get_funcao_display }}</td>
+                <td class="border px-4 py-2">{{ membro.usuario.email }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">Nenhum membro adicionado ainda.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

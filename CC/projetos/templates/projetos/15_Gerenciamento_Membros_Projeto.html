@@ -1,0 +1,23 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Gerenciamento Membros Projeto{% endblock %}
+
+{% block conteudo %}
+<h2 class="mb-12 text-2xl text-center text-purple-900">15 - Gerenciamento Membros Projeto</h2>
+
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center text-purple-900">{{ titulo }}</h2>
+    <form method="get" action="{% url 'projetos:form_adiciona_membro' %}">
+        {% csrf_token %}
+
+        <button class="py-4 px-8 text-lg bg-purple-500 hover:bg-purple-700 rounded-xl text-white" type="submit">Adicionar Membro</button>
+    </form>
+
+    <form method="get" action="{% url 'projetos:confirm_excluir_membro' %}">
+        {% csrf_token %}
+
+        <button class="py-4 px-8 text-lg bg-purple-500 hover:bg-purple-700 rounded-xl text-white" type="submit">Excluir Membro</button>
+    </form>
+</div>
+
+{% endblock %}

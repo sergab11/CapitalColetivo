@@ -1,0 +1,21 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Confirmação Excluir Membro Projeto{% endblock %}
+
+{% block conteudo %}
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <h1 class="text-purple-700 text-3xl font-bold mb-6 text-bold">Confirmação de Exclusão</h1>
+        <!-- Informações do Membro do Projeto -->
+        <p class="mb-4">Você está prestes a excluir o membro <strong>{{ membro.usuario.nome }}</strong> do projeto <strong>"{{ membro.projeto.titulo }}"</strong>.</p>
+        <p class="mb-4">Função: {{ membro.get_funcao_display }}</p>
+        <p class="mb-6">Email: {{ membro.usuario.email }}</p>
+        
+        <!-- Formulário de Confirmação de Exclusão -->
+        <form action="{% url 'projetos:confirma_excluir_membro' membro.id %}" method="post">
+            {% csrf_token %}
+            <p class="mb-4">Tem certeza que deseja excluir este membro?</p>
+            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Confirmar Exclusão</button>
+        </form>
+</div>
+
+{% endblock %}

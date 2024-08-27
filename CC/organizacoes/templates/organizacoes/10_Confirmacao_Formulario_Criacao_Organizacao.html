@@ -1,0 +1,25 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Confirmação Formulário Criação Organização{% endblock %}
+
+{% block conteudo %}
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <h1 class="mb-6 text-3xl text-purple-800 text-center">Resumo Nova Organização</h1>
+    <p class="text-purple-900 text-center">Por favor, confirme os dados preenchidos:</p>
+    <ul class="mt-4">
+        <li><strong>Nome da Organização:</strong> {{ organizacao.nome }}</li>
+        <li><strong>Titular da Conta:</strong> {{ organizacao.titular_conta }}</li>
+        <li><strong>Número da Conta:</strong> {{ organizacao.numero_conta }}</li>
+        <li><strong>Agência Bancária:</strong> {{ organizacao.agencia_bancaria }}</li>
+        <li><strong>Banco:</strong> {{ organizacao.banco }}</li>
+        <li><strong>CPF/CNPJ:</strong> {{ organizacao.cpf_cnpj }}</li>
+        <li><strong>Contato:</strong> {{ organizacao.contato }}</li>
+        <li><strong>Descrição:</strong> {{ organizacao.descricao }}</li>
+    </ul>
+
+    <form method="post" action=".">
+        {% csrf_token %}
+        <button type="submit" class="py-4 px-8 text-lg bg-purple-500 hover:bg-purple-700 rounded-xl text-white">Criar Organização!</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'usuarios/base.html' %}
+
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl text-purple-800">
+    <h1 class="mb-6 text-3xl text-purple-900 text-center">Nova Organização</h1>
+
+    <form method="post" action=".">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Nome</label><br>
+            {{ form.nome }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">CPF/CNPJ</label><br>
+            {{ form.cpf_cnpj }}
+        </div>
+
+        <h3 class="mb-6 text-2xl text-purple-800 text-center">Dados Conta Bancária</h3>
+        <div class="mb-3">
+            <label class="inline-block mb-2">Nome do Titular</label><br>
+            {{ form.titular_conta }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Número da Conta</label><br>
+            {{ form.numero_conta }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Agência</label><br>
+            {{ form.agencia_bancaria }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Banco</label><br>
+            {{ form.banco }}
+        </div>
+
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Contato</label><br>
+            {{ form.contato }}
+        </div>
+
+        <div class="mb-3">
+            <label class="inline-block mb-2">Descrição</label><br>
+            {{ form.descricao }}
+        </div>
+
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %}
+                    {% if field.errors %}
+                        <li>
+                            <strong>{{ field.label }}:</strong> {{ field.errors|striptags }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button class="py-4 px-8 text-lg bg-purple-500 hover:bg-purple-700 rounded-xl text-white">Salvar</button>
+    </form>
+</div>
+{% endblock %}

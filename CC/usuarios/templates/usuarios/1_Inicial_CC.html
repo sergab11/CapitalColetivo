@@ -1,0 +1,42 @@
+{% extends 'usuarios/base.html' %}
+
+{% block titulo %}Inicial{% endblock %}
+
+{% block conteudo %}
+<div class="mb-12 text-2xl bg-purple-200 p-8 rounded-lg shadow-md">
+
+    <div class="text-center mb-6">
+        <h1 class="text-3xl font-bold text-purple-700">Bem-vindo à Capital Coletivo!</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-purple-100 p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold text-purple-700">Número de Projetos Ativos na Plataforma</h2>
+            <p class="text-2xl text-purple-900">{{ total_projetos }}</p>
+        </div>
+        <div class="bg-purple-100 p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold text-purple-700">Total Financiado na Plataforma</h2>
+            <p class="text-2xl text-purple-900">R$ {{ total_financiado|floatformat:2 }}</p>
+        </div>
+        <div class="bg-purple-100 p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold text-purple-700">Total de Contribuições</h2>
+            <p class="text-2xl text-purple-900">{{ total_contribuicoes }}</p>
+        </div>
+    </div>
+
+    <div class="mt-6">
+        <h2 class="text-2xl font-bold text-purple-700 mb-4">Top 5 Campanhas Próximas de Conclusão</h2>
+        <ul class="space-y-4">
+            {% for campanha, crowd in listas_zip %}
+                <li>
+                    <a href="{% url 'campanhas:principal_camp' crowd.0 crowd.1 %}" class="text-xl text-purple-700 hover:text-purple-900 hover:underline">
+                        {{ campanha.titulo }}
+                    </a>
+                    <span class="text-sm text-gray-600">({{ campanha.percentual_arrecadado|floatformat:2 }}%)</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+{% endblock %}

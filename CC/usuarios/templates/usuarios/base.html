@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <title>{% block titulo %}{% endblock %} | Capital Coletivo</title>
+    </head>
+
+    <body>
+        <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
+            <a href="/">
+                <img src="/Imagens/Logo_e_Nome.PNG" class="w-40 h-30">
+            </a>
+
+            <div class="flex space-x-4">
+                <form method="get" class="py-1" action="{% url 'navegacao:resultado_pesquisa' %}">
+                    {% csrf_token %}
+
+                    <!-- Barra de Pesquisa -->
+                    <input name="query" type="text" placeholder="Buscar..." class="border-2 border-purple-800 p-2 rounded-lg outline-none focus:ring-2 focus:ring-purple-600">
+                    <!-- Botão Pesquisar -->
+                    <button class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        Pesquisar
+                    </button>
+                </form>
+            </div>
+
+            <!--{% block cabeçalho %}
+            {% endblock %}-->
+
+            <div class="space-x-6">
+                {% if request.user.is_authenticated %}
+                        <a href="{% url 'contribuicoes:minhas_contribs' %}" class="py-3 text-purple-800 font-semibold hover:text-purple-800">Minhas Contribuições</a>
+                        <a href="{% url 'projetos:meus_projetos' %}" class="py-3 text-purple-800 font-semibold hover:text-purple-800">Meus Projetos</a>
+                        {% if user.tem_organizacao %}
+                            <a href="{% url 'organizacoes:gerencia_org' user.organizacao_id %}" class="py-3 text-purple-800 font-semibold hover:text-purple-800">Minha Organização</a>
+                        {% else %}
+                            <a href="{% url 'organizacoes:form_solicita' %}" class="py-3 text-purple-800 font-semibold hover:text-purple-800">Crie uma Organização</a>
+                        {% endif %}
+                        <span class="py-3 text-purple-800  font-bold">Olá, {{ user.nome }}!!</span>
+                        <a href="{% url 'usuarios:logout_conta' %}" class="text-purple-800 font-semibold hover:text-purple-800">Sair</a>
+                {% else %}
+                        <a href="{% url 'usuarios:criar_conta' %}" class="py-3 text-lg font-semibold bg-purple-800 text-white rounded-xl hover:bg-purple-700">Criar Conta!</a>
+                        <a href="{% url 'usuarios:login_conta' %}" class="py-3 text-lg font-semibold bg-purple-800 text-white rounded-xl hover:bg-purple-700">Entrar</a>
+                {% endif %}
+            </div>
+
+        </nav>
+        <div class="px-6 py-6">
+            {% block conteudo %}
+            {% endblock %}
+        </div>
+
+        <footer class="py-6 px-6 flex justify-between bg-purple-900">
+            <div class="w-2/3 pr-10">
+                <h3 class="mb-5 font-semibold text-white">Sobre</h3>
+
+                <p class="text-lg text-white">Plataforma relativa ao Projeto Final do aluno Sérgio Gabriel.</p>
+            </div>
+        </footer>
+    </body>
+</html>

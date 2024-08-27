@@ -1,0 +1,17 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Confirmação Adicionar Membro Projeto{% endblock %}
+
+{% block conteudo %}
+<h2 class="mb-12 text-2xl text-center text-purple-900">17 - Confirmação Adicionar Membro Projeto</h2>
+
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center text-purple-900">{{ titulo }}</h2>
+    <form method="post" action="{% url 'projetos:adicionar_membro' %}">
+        {% csrf_token %}
+
+        <button class="py-4 px-8 text-lg bg-purple-500 hover:bg-purple-700 rounded-xl text-white" type="submit">Adicionar Membro!</button>
+    </form>
+</div>
+
+{% endblock %}

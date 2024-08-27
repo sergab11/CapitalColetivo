@@ -1,0 +1,62 @@
+{% extends 'usuarios/base.html' %}
+
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center text-purple-900">{{ titulo }}</h2>
+    <form method="post" action=".">
+      {% csrf_token %}
+
+      <p><strong>Título:</strong> {{ projeto.titulo }}</p>
+      <p><strong>Imagem de Perfil:</strong> <img src="{{ projeto.imagem_perfil.url }}" alt="Imagem de Perfil" style="width: 100px; height: 100px;"></p><br>
+      <p><strong>Membros do Projeto:</strong></p>
+      
+      <table class="members-table">
+          <thead>
+              <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Função</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for membro in membros %}
+                  <tr>
+                      <td>{{ membro.usuario.nome }}</td>
+                      <td>{{ membro.usuario.email }}</td>
+                      <td>{{ membro.get_funcao_display }}</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      
+      <br><p><strong>Pitch Deck</strong></p>
+      <p>{{ projeto.texto }}</p><br>
+      {% if projeto.imagem1 %}
+          <p><strong>Imagem 1:</strong> <img src="{{ projeto.imagem1.url }}" alt="Imagem 1" style="width: 100px; height: 100px;"></p><br>
+      {% endif %}
+      {% if projeto.imagem2 %}
+          <p><strong>Imagem 2:</strong> <img src="{{ projeto.imagem2.url }}" alt="Imagem 2" style="width: 100px; height: 100px;"></p><br>
+      {% endif %}
+      {% if projeto.imagem3 %}
+          <p><strong>Imagem 3:</strong> <img src="{{ projeto.imagem3.url }}" alt="Imagem 3" style="width: 100px; height: 100px;"></p><br>
+      {% endif %}
+
+      <button class="py-4 px-8 text-lg bg-purple-500 hover:bg-purple-700 rounded-xl text-white" type="submit">Criar Projeto!</button>
+    </form>
+
+    <style>
+      .members-table {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 15px 5px; /* Espaço entre as colunas e linhas da tabela */
+      }
+      .members-table th, .members-table td {
+          padding: 10px;
+          text-align: left;
+      }
+  </style>
+</div>
+{% endblock %}

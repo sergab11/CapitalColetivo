@@ -1,0 +1,44 @@
+{% extends 'usuarios/base.html' %}
+
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+
+<!-- Área 1: Dados da Organização -->
+<div class="bg-white shadow-md rounded-lg mb-5 p-1">
+    <h2 class="text-2xl font-bold mb-4 text-purple-800">{{ organizacao.nome }}</h2>
+    <div class="mb-4">
+        <p><strong>Dados da Conta Bancária:</strong>
+            <p>Nome Titular da Conta: {{ organizacao.titular_conta }} </p>
+            <p>Número da Conta: {{ organizacao.numero_conta }}</p>
+            <p>Agência Bancária: {{ organizacao.agencia_bancaria }}</p>
+            <p>Banco: {{ organizacao.banco.nome }}</p><br>
+        <p><strong>Contato:</strong> {{ organizacao.contato }}</p>
+        <p><strong>Descrição:</strong> {{ organizacao.descricao }}</p>
+        </div>
+        <a href="#" class="bg-purple-600 text-white py-2 px-4 rounded inline-block">Editar Informações</a>
+    </div>
+
+    <!-- Área 2: Projetos -->
+    <div class="bg-white shadow-md rounded-lg mb-8 p-6">
+        <h2 class="text-2xl font-bold mb-4 text-purple-800">Projetos</h2>
+        {% if organizacao.projetos.exists %}
+            {% for projeto in organizacao.projetos.all %}
+                <div class="flex justify-between items-center mb-4">
+                    <a href="{% url 'projetos:principal_proj' projeto.id %}" class="text-purple-600 hover:underline">{{ projeto.titulo }}</a>
+                    <span class="text-purple-800">{{ projeto.valor_arrecadado }}</span>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-purple-800">A Organização ainda não possui Projetos.</p>
+        {% endif %}
+    </div>
+
+    <!-- Área 3: Criar Projeto -->
+    <div class="text-center">
+        <a href="{% url 'projetos:form_criacao_proj' organizacao.id %}" class="bg-purple-600 text-white py-3 px-6 rounded inline-block text-xl">Criar Projeto!</a>
+    </div>
+
+</div>
+{% endblock %}
