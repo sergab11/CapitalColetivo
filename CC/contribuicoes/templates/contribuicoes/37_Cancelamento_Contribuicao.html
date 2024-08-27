@@ -1,0 +1,12 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+<h2 class="mb-12 text-2xl text-center text-purple-900">37 - Cancelamento Contribuição</h2>
+
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <h2 class="mb-1 text-2xl text-center text-purple-900">Contribuição [{{ pk_contrib }}] cancelada em [{{ data_cancel }}]</h2>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'usuarios/base.html' %}
+
+{% block titulo %}Dados Pagamento{% endblock %}
+
+{% block conteudo %}
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <div class="max-w-md mx-auto">
+        <h1 class="text-3xl text-purple-800 font-bold mb-8">Informações de Pagamento</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="mb-4">
+                <label for="id_nome_titular" class="block text-sm font-medium text-purple-800 mb-2">Nome do Titular</label>
+                <input type="text" id="id_nome_titular" name="nome_titular" class="border border-purple-700 rounded-md py-2 px-3 w-full">
+            </div>
+            
+            <div class="mb-4">
+                <label for="id_numero_cartao" class="block text-sm font-medium text-purple-800 mb-2">Número do Cartão</label>
+                <input type="text" id="id_numero_cartao" name="numero_cartao" class="border border-purple-700 rounded-md py-2 px-3 w-full">
+            </div>
+            
+            <div class="mb-4">
+                <label for="id_validade_cartao" class="block text-sm font-medium text-purple-800 mb-2">Validade do Cartão</label>
+                <input type="date" id="id_validade_cartao" name="validade_cartao" class="border border-purple-700 rounded-md py-2 px-3 w-full">
+            </div>
+            
+            <div class="mb-4">
+                <label for="id_cvv_cartao" class="block text-sm font-medium text-purple-800 mb-2">CVV</label>
+                <input type="text" id="id_cvv_cartao" name="cvv_cartao" class="border border-purple-700 rounded-md py-2 px-3 w-full">
+            </div>
+            
+            <button type="submit" class="bg-purple-800 text-white py-2 px-4 rounded-md mt-4">Finalizar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

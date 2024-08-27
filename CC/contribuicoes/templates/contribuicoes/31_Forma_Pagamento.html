@@ -1,0 +1,32 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+<div class="w-1/2 my-6 mx-auto px-6 bg-purple-200 rounded-xl">
+    <div class="max-w-md mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Escolha a Forma de Pagamento</h1>
+        
+        <form method="post" action=".">
+            {% csrf_token %}
+            
+            <div class="mb-4">
+                <label class="inline-flex items-center">
+                    <input type="radio" id="cartao" name="forma_pagamento" value="cartao">
+                    <span class="ml-2">Cartão de Crédito/Débito</span>
+                </label>
+            </div>
+            
+            <div class="mb-4">
+                <label class="inline-flex items-center">
+                    <input type="radio" id="pix" name="forma_pagamento" value="pix">
+                    <span class="ml-2">Pix</span>
+                </label>
+            </div>
+            
+            <button type="submit" class="bg-purple-800 text-white py-2 px-4 rounded-md">Selecionar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

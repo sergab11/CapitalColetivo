@@ -1,0 +1,37 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <div class="max-w-xl mx-auto bg-purple-200 p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Contribuição # {{ contribuicao.id }}</h1>
+        
+        <div class="mb-4">
+            <p><span class="font-bold">Campanha:</span> {{ contribuicao.campanha }}</p>
+        </div>
+        
+        <div class="mb-4">
+            <p><span class="font-bold">Status:</span> {{ contribuicao.get_status_contrib_display }}</p>
+        </div>
+        
+        <div class="mb-4">
+            <p><span class="font-bold">Valor:</span> R$ {{ contribuicao.valor_contribuicao }}</p>
+        </div>
+        
+        <div class="mb-4">
+            <p><span class="font-bold">Data:</span> {{ contribuicao.data_contribuicao|date:"d/m/Y H:i:s" }}</p>
+        </div>
+        
+        <div class="mb-4">
+            <p><span class="font-bold">Forma de Pagamento:</span> {{ contribuicao.forma_pagamento }}</p>
+        </div>
+        
+        <form action="{% url 'contribuicoes:motivo_cancel_contrib' contribuicao.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-md">Cancelar Contribuição</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

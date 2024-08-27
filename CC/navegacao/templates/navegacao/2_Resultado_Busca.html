@@ -1,0 +1,97 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Resultado Pesquisa{% endblock %}
+
+{% block conteudo %}
+<div class="w-full max-w-4xl my-6 mx-auto px-6 bg-purple-100 rounded-xl">
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Resultado para "{{ query }}"</h1>
+
+        <!-- Seção de Resultados -->
+        {% if projetos %}
+            <h2 class="text-lg font-semibold mb-2"><strong>Projetos encontrados:</strong></h2>
+            <ul class="mb-4 space-y-4">
+                {% for projeto in projetos %}
+                    <li class="border-b border-gray-200 pb-2">
+                        <a href="{% url 'projetos:principal_proj' projeto.id %}" class="text-blue-600 font-semibold hover:text-blue-800 hover:underline transition duration-300">{{ projeto.titulo }}</a>
+                        <div class="mt-2 text-sm text-gray-600">
+                            <span class="font-bold">Categoria:</span> {{ projeto.categoria }}
+                            <span class="ml-4 font-bold">Possui Campanha Em Andamento?</span>
+                            {% if projeto.tem_campanha %}
+                                <span class="text-green-600">Sim</span>
+                            {% else %}
+                                <span class="text-red-600">Não</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if doacao %}
+            <h2 class="text-lg font-semibold mb-2"><strong>Campanhas de Doação encontradas:</strong></h2>
+            <ul class="mb-4 space-y-4">
+                {% for camp_D in doacao %}
+                    <li class="border-b border-gray-200 pb-2">
+                        <a href="{% url 'campanhas:principal_camp' 1 camp_D.id %}" class="text-blue-600 font-semibold hover:text-blue-800 hover:underline transition duration-300">{{ camp_D.campanha.titulo }}</a>
+                        {% if camp_D.campanha.em_andamento %}
+                            <span class="ml-4 bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs font-bold">Em Andamento</span>
+                        {% else %}
+                            <span class="ml-4 bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-bold">Concluída</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if recompensa %}
+            <h2 class="text-lg font-semibold mb-2"><strong>Campanhas de Recompensa encontradas:</strong></h2>
+            <ul class="mb-4 space-y-4">
+                {% for camp_R in recompensa %}
+                    <li class="border-b border-gray-200 pb-2">
+                        <a href="{% url 'campanhas:principal_camp' 2 camp_R.id %}" class="text-blue-600 font-semibold hover:text-blue-800 hover:underline transition duration-300">{{ camp_R.campanha.titulo }}</a>
+                        {% if camp_R.campanha.em_andamento %}
+                            <span class="ml-4 bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs font-bold">Em Andamento</span>
+                        {% else %}
+                            <span class="ml-4 bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-bold">Concluída</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if emprestimo %}
+            <h2 class="text-lg font-semibold mb-2"><strong>Campanhas de Empréstimo encontradas:</strong></h2>
+            <ul class="mb-4 space-y-4">
+                {% for camp_E in emprestimo %}
+                    <li class="border-b border-gray-200 pb-2">
+                        <a href="{% url 'campanhas:principal_camp' 3 camp_E.id %}" class="text-blue-600 font-semibold hover:text-blue-800 hover:underline transition duration-300">{{ camp_E.campanha.titulo }}</a>
+                        {% if camp_E.campanha.em_andamento %}
+                            <span class="ml-4 bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs font-bold">Em Andamento</span>
+                        {% else %}
+                            <span class="ml-4 bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-bold">Concluída</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if usuarios %}
+            <h2 class="text-lg font-semibold mb-2"><strong>Usuários encontrados:</strong></h2>
+            <ul class="space-y-4">
+                {% for usuario in usuarios %}
+                    <li class="border-b border-gray-200 pb-2">
+                        <a href="{% url 'usuarios:principal' %}" class="text-blue-600 font-semibold hover:text-blue-800 hover:underline transition duration-300">{{ usuario.nome }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if not projetos and not doacao and not recompensa and not emprestimo and not usuarios %}
+            <p>Nenhum resultado encontrado para "{{ query }}".</p>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

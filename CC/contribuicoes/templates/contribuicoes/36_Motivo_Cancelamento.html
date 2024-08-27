@@ -1,0 +1,24 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+<div class="w-1/2 my-6 mx-auto px-6 bg-gray-100 rounded-xl">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Motivo do Cancelamento para a Campanha "{{ titulo_camp }}"</h1>
+        
+        <form method="post" actio=".">
+            {% csrf_token %}
+            {% for motivo in motivos_cancelamento %}
+                <label class="inline-flex items-center mb-2">
+                    <input type="radio" name="motivo_cancelamento" value="{{ motivo.id }}">
+                    <span class="ml-2">{{ motivo }}</span>
+                </label>
+            {% endfor %}
+            
+            <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-md mt-4">Confirmar Cancelamento</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
